@@ -7,32 +7,52 @@ Original file is located at
     https://colab.research.google.com/drive/1KGtEYPAy0rspg_0F_IvNREWVunL0eQ-4
 """
 
+import streamlit as st
+
+# --- Graph definition ---
 graph = {
-    'A': ['B', 'D'],
-    'B': ['C', 'E', 'G'],
-    'C': ['A'],
-    'D': ['C'],
-    'E': ['H'],
-    'F': [],
-    'G': ['F'],
-    'H': ['F', 'G']
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
 }
 
-visited = [] # List to keep track of visited nodes.
-queue = []     #Initialize a queue
+# --- BFS function ---
+def bfs(graph, start):
+    visited = []
+    queue = []
+    visited.append(start)
+    queue.append(start)
+    traversal_order = []
 
-def bfs(visited, graph, node):
-  visited.append(node)
-  queue.append(node)
+    while queue:
+        s = queue.pop(0)
+        traversal_order.append(s)
 
-  while queue:
-    s = queue.pop(0)
-    print (s, end = " ")
+        for neighbour in graph[s]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
 
-    for neighbour in graph[s]:
-      if neighbour not in visited:
-        visited.append(neighbour)
-        queue.append(neighbour)
+    return traversal_order
 
-# Driver Code
-bfs(visited, graph, 'A')
+# --- Streamlit interface ---
+st.title("Breadth-First Search (BFS) Traversal")
+st.write("This app performs BFS traversal on a directed graph.")
+
+# User input (optional)
+start_node = st.selectbox("Select a starting node:", list(graph.keys()), index=0)
+
+if st.button("Run BFS"):
+    result = bfs(graph, start_node)
+    st.success(f"BFS Traversal starting from '{start_node}':")
+    st.write(" → ".join(result))
+
+    # Optional: Show graph structure
+    st.subheader("Graph Structure (Adjacency List)")
+    for node, neighbors in graph.items():
+        st.write(f"**{node}** → {', '.join(neighbors) if neighbors else '(no neighbors)'}")
+
+st.caption("Developed for Search Algorithms Lab - BFS Example")
