@@ -58,4 +58,3 @@ if st.button("Run BFS"):
         st.write(f"**{node}** → {', '.join(neighbors) if neighbors else '(no neighbors)'}")
 
 st.caption("Developed for Search Algorithms Lab - BFS Example")
-at this coding,can help me add the image
