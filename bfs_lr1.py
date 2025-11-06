@@ -9,13 +9,6 @@ Original file is located at
 
 import streamlit as st
 
-# --- App Title ---
-st.title("Breadth-First Search (BFS) Traversal")
-st.write("This app performs BFS traversal on a directed graph (see image below).")
-
-# --- Display the graph image ---
-st.image("/content/LabReport_BSD2513_#1.jpg", caption="Directed Graph for BFS Traversal", use_column_width=True)
-
 # --- Graph definition ---
 graph = {
     'A': ['B', 'D'],
@@ -30,20 +23,11 @@ graph = {
 
 # --- BFS function ---
 def bfs(graph, start):
-    """
-    Perform Breadth-First Search traversal on a directed graph.
-    Args:
-        graph (dict): Adjacency list of the graph
-        start (str): Starting node
-    Returns:
-        list: Traversal order
-    """
     visited = []
     queue = []
-    traversal_order = []
-
     visited.append(start)
     queue.append(start)
+    traversal_order = []
 
     while queue:
         s = queue.pop(0)
@@ -57,21 +41,21 @@ def bfs(graph, start):
     return traversal_order
 
 # --- Streamlit interface ---
+st.title("Breadth-First Search (BFS) Traversal")
+st.write("This app performs BFS traversal on a directed graph.")
+
+# User input (optional)
 start_node = st.selectbox("Select a starting node:", list(graph.keys()), index=0)
 
-if st.button("Run BFS Traversal"):
+if st.button("Run BFS"):
     result = bfs(graph, start_node)
-    st.success(f"**BFS Traversal starting from '{start_node}':**")
+    st.success(f"BFS Traversal starting from '{start_node}':")
     st.write(" → ".join(result))
 
-    # --- Show traversal steps ---
-    st.subheader("Traversal Steps")
-    for i, node in enumerate(result, start=1):
-        st.write(f"Step {i}: Visit **{node}**")
-
-# --- Show graph structure ---
-st.subheader("Graph Structure (Adjacency List)")
-for node, neighbors in graph.items():
-    st.write(f"**{node}** → {', '.join(neighbors) if neighbors else '(no neighbors)'}")
+    # Optional: Show graph structure
+    st.subheader("Graph Structure (Adjacency List)")
+    for node, neighbors in graph.items():
+        st.write(f"**{node}** → {', '.join(neighbors) if neighbors else '(no neighbors)'}")
 
 st.caption("Developed for Search Algorithms Lab - BFS Example")
+at this coding,can help me add the image
