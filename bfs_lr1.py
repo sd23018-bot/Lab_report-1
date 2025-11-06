@@ -58,3 +58,11 @@ if st.button("Run BFS"):
         st.write(f"**{node}** → {', '.join(neighbors) if neighbors else '(no neighbors)'}")
 
 st.caption("Developed for Search Algorithms Lab - BFS Example")
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# Visualize graph
+G = nx.DiGraph(graph)
+fig, ax = plt.subplots()
+nx.draw(G, with_labels=True, node_color='skyblue', node_size=1500, arrows=True, ax=ax)
+st.pyplot(fig)
