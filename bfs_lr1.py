@@ -11,12 +11,14 @@ import streamlit as st
 
 # --- Graph definition ---
 graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['F'],
-    'D': [],
-    'E': ['F'],
-    'F': []
+    'A': ['B', 'D'],
+    'B': ['C', 'E', 'G'],
+    'C': ['A'],
+    'D': ['C'],
+    'E': ['H'],
+    'F': [],
+    'G': ['F'],
+    'H': ['F', 'G']
 }
 
 # --- BFS function ---
